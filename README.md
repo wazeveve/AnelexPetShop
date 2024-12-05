@@ -1,6 +1,6 @@
 # PetShop ANELEX
 
-Projeto desenvolvido durante os periodos 5 e 6 do meu Curso de Bach. Ciência da Computação.
+Projeto desenvolvido durante o 5° e 6° período do meu Curso de Bach. Ciência da Computação.
 Desenvolvido entre diversas disciplinas, entre elas: Front-End, Back-End, Engenharia de Software, Banco de Dados e Projetos Integradores.
 
 
