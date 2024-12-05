@@ -7,6 +7,6 @@ Desenvolvido entre diversas disciplinas, entre elas: Front-End, Back-End, Engenh
 
 ## Autores
 
-- [@maxmohad6](https://www.github.com/maxmohad6)
+- [@maxmohamed6](https://www.github.com/maxmohamed6)
 - [@Jean-silvaDev](https://www.github.com/Jean-silvaDev)
 - [@wazeveve](https://www.github.com/wazeveve)
