@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/login.css">
     <script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -22,14 +23,14 @@
 			  </div>
 		  
 			  <!-- Login Form -->
-			  <form action="login.html">
+			  <form action="login.html" id="formulario">
                 <input type="text" id="name" class="fadeIn second" name="name" placeholder="Nome">
-				<input type="text" id="user" class="fadeIn third" name="login" placeholder="Usuário">
+				<input type="text" id="user" class="fadeIn third" name="username" placeholder="Usuário">
                 <input type="text" id="tel" class="fadeIn fourth" oninput="formatarTelefone(this)" name="tel" placeholder="Telefone">
 				<input type="text" id="email" class="fadeIn fifth" name="email" placeholder="E-Mail">
-                <input type="password" id="login" class="fadeIn sixth" name="login" placeholder="Senha">
+                <input type="password" id="password" class="fadeIn sixth" name="password" placeholder="Senha">
 				<input type="submit" class="fadeIn seventh bg-success" value="Criar Conta">
-			  </form>
+			</form>
 		  
 			  <!-- Remind Passowrd -->
 			  <div id="formFooter">
@@ -62,5 +63,7 @@
     </script>
 
 </body>
+
+<script src="js/axios/criaCliente.js"></script>
 
 </html>
