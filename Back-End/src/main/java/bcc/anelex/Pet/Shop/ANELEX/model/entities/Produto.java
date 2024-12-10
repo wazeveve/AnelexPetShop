@@ -13,6 +13,8 @@ public class Produto {
     private String description;
     @Column(nullable = false, precision = 2)
     private double value;
+    @Column(nullable = false)
+    private String path;
 
     public Long getId() {
         return id;
@@ -40,6 +42,14 @@ public class Produto {
 
     public double getValue() {
         return value;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public void setValue(double value) {
