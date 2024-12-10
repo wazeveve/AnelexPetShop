@@ -10,4 +10,4 @@ Desenvolvido entre diversas disciplinas, entre elas: Front-End, Back-End, Engenh
 - [@maxmohamed6](https://www.github.com/maxmohamed6)
 - [@Jean-silvaDev](https://www.github.com/Jean-silvaDev)
 - [@wazeveve](https://www.github.com/wazeveve)
-- [@OtavioHenriquedev8bit](https://www.github.com/)
+- [@OtavioHenriquedev8bit](https://www.github.com/OtavioHenriquedev8bit)
