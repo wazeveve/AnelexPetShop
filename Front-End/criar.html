@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<title>Login - ANELEX</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/login.css">
+    <script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<section>
+		<div class="wrapper fadeInDown">
+			<div id="formContent">
+			  <div class="fadeIn first">
+				<p class="navbar-brand"><a href="index.html"><img src="images/logo.png" style="width: 250px; height: 70px; margin-top: 20px;"></a></p>
+			  </div>
+		  
+			  <!-- Login Form -->
+			  <form action="login.html" id="formulario">
+                <input type="text" id="name" class="fadeIn second" name="name" placeholder="Nome">
+				<input type="text" id="user" class="fadeIn third" name="username" placeholder="Usuário">
+                <input type="text" id="tel" class="fadeIn fourth" oninput="formatarTelefone(this)" name="tel" placeholder="Telefone">
+				<input type="text" id="email" class="fadeIn fifth" name="email" placeholder="E-Mail">
+                <input type="password" id="password" class="fadeIn sixth" name="password" placeholder="Senha">
+				<input type="submit" class="fadeIn seventh bg-success" value="Criar Conta">
+			</form>
+		  
+			  <!-- Remind Passowrd -->
+			  <div id="formFooter">
+				<a class="underlineHover" href="login.html">Login</a> <br>
+			  </div>
+		  
+			</div>
+		  </div>
+	</section>
+
+
+	<footer class="footer" style="margin-top: -7px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p class="text-success" style="font-size: 20px;">
+						Copyright &copy; Todos os direitos Reservados | BBC 5º Periodo | Engenharia de Software
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+    <script>
+        function formatarTelefone(input) {
+            let numero = input.value.replace(/\D/g, ""); 
+            numero = numero.replace(/^(\d{2})(\d)/g, "($1) $2"); 
+            numero = numero.replace(/(\d{5})(\d)/, "$1-$2"); 
+            input.value = numero;
+        }
+    </script>
+
+</body>
+
+<script src="js/axios/criaCliente.js"></script>
+
+</html>
