@@ -17,6 +17,10 @@ public class Pet {
     private String gender;
     @Column(nullable = false)
     private Date age;
+    @Column(nullable = false, length = 100)
+    private String tipo;
+    @Column(length = 150, nullable = false)
+    private String path;
 
     public Long getId() {
         return id;
@@ -56,5 +60,21 @@ public class Pet {
 
     public void setAge(Date age) {
         this.age = age;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

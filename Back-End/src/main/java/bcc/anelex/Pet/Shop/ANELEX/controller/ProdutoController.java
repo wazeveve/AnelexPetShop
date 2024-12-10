@@ -34,6 +34,7 @@ public class ProdutoController {
             Produto produtoN = (Produto) optional.get();
             produtoN.setName(produto.getName());
             produtoN.setDescription(produto.getDescription());
+            produtoN.setPath(produto.getPath());
             produtoN.setValue(produto.getValue());
             this.produtoRepository.save(produtoN);
             return ResponseEntity.status(HttpStatus.CREATED).body(produtoN);
