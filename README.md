@@ -11,3 +11,8 @@ Desenvolvido entre diversas disciplinas, entre elas: Front-End, Back-End, Engenh
 - [@Jean-silvaDev](https://www.github.com/Jean-silvaDev)
 - [@wazeveve](https://www.github.com/wazeveve)
 - [@OtavioHenriquedev8bit](https://www.github.com/OtavioHenriquedev8bit)
+
+
+##
+
+Observação: Visualizar os commits pelo Activity
