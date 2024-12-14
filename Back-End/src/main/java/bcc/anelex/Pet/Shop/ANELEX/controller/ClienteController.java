@@ -36,7 +36,7 @@ public class ClienteController {
             Cliente clienteOriginal = this.clienteService.update(id,cliente);
             return new ResponseEntity(clienteOriginal, HttpStatus.OK);
         } catch (ClienteNotFoundException cnfe){
-            return new ResponseEntity<>(cnfe.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(cnfe.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
