@@ -20,33 +20,26 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> pegarClientes(){
+    public ResponseEntity<List<Cliente>> pegarClientes() {
         return ResponseEntity.status(HttpStatus.OK).body(this.clienteService.read());
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> criaCliente(@RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> criaCliente(@RequestBody Cliente cliente) {
         this.clienteService.create(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizaCliente(@PathVariable Long id, @RequestBody Cliente cliente){
-        try{
-            Cliente clienteOriginal = this.clienteService.update(id,cliente);
-            return new ResponseEntity(clienteOriginal, HttpStatus.OK);
-        } catch (ClienteNotFoundException cnfe){
-            return new ResponseEntity(cnfe.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity atualizaCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+        Cliente clienteOriginal = this.clienteService.update(id, cliente);
+        return new ResponseEntity(clienteOriginal, HttpStatus.OK);
+
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Cliente> deletaCliente(@PathVariable Long id){
-        try {
-            this.clienteService.delete(id);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } catch (ClienteNotFoundException cnfe) {
-            return new ResponseEntity(cnfe.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Cliente> deletaCliente(@PathVariable Long id) {
+        this.clienteService.delete(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

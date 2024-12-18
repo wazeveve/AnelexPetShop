@@ -19,33 +19,29 @@ public class GerenteController {
     private GerenteService gerenteService;
 
     @GetMapping
-    public ResponseEntity<List<Gerente>> pegarGerentes(){
+    public ResponseEntity<List<Gerente>> pegarGerentes() {
         return ResponseEntity.status(HttpStatus.OK).body(this.gerenteService.read());
     }
 
     @PostMapping
-    public ResponseEntity<Gerente> criaGerente(@RequestBody Gerente gerente){
+    public ResponseEntity<Gerente> criaGerente(@RequestBody Gerente gerente) {
         this.gerenteService.create(gerente);
         return ResponseEntity.status(HttpStatus.CREATED).body(gerente);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizaGerente(@PathVariable Long id, @RequestBody Gerente gerente){
-        try{
-            Gerente gerenteOriginal = this.gerenteService.update(id, gerente);
-            return new ResponseEntity(gerenteOriginal, HttpStatus.OK);
-        } catch (GerenteNotFoundException gnfe){
-            return new ResponseEntity(gnfe.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity atualizaGerente(@PathVariable Long id, @RequestBody Gerente gerente) {
+
+        Gerente gerenteOriginal = this.gerenteService.update(id, gerente);
+        return new ResponseEntity(gerenteOriginal, HttpStatus.OK);
+
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Gerente> deletaGerente(@PathVariable Long id){
-        try{
-            this.gerenteService.delete(id);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } catch (GerenteNotFoundException gnfe){
-            return new ResponseEntity(gnfe.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Gerente> deletaGerente(@PathVariable Long id) {
+
+        this.gerenteService.delete(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+
     }
 }

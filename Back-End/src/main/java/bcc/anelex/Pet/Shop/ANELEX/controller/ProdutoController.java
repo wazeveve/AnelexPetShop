@@ -19,33 +19,27 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<List<Produto>> pegaProdutos(){
+    public ResponseEntity<List<Produto>> pegaProdutos() {
         return ResponseEntity.status(HttpStatus.OK).body(this.produtoService.read());
     }
 
     @PostMapping
-    public ResponseEntity<Produto> criaProduto(@RequestBody Produto produto){
+    public ResponseEntity<Produto> criaProduto(@RequestBody Produto produto) {
         this.produtoService.create(produto);
         return ResponseEntity.status(HttpStatus.CREATED).body(produto);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizaProduto(@PathVariable Long id, @RequestBody Produto produto){
-        try{
-            Produto produtoOriginal = this.produtoService.update(id, produto);
-            return new ResponseEntity(produtoOriginal, HttpStatus.OK);
-        } catch (ProdutoNotFoundException pnfe) {
-            return new ResponseEntity(pnfe.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity atualizaProduto(@PathVariable Long id, @RequestBody Produto produto) {
+        Produto produtoOriginal = this.produtoService.update(id, produto);
+        return new ResponseEntity(produtoOriginal, HttpStatus.OK);
+
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Produto> deletaProduto(@PathVariable Long id){
-        try{
-            this.produtoService.delete(id);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } catch (ProdutoNotFoundException pnfe){
-            return new ResponseEntity(pnfe.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Produto> deletaProduto(@PathVariable Long id) {
+        this.produtoService.delete(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+
     }
 }
