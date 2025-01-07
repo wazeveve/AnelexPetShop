@@ -1,6 +1,7 @@
 package bcc.anelex.Anelex.controller;
 
 import bcc.anelex.Anelex.model.entities.RelatorioConsultas;
+import bcc.anelex.Anelex.model.services.RelatorioConsultasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
