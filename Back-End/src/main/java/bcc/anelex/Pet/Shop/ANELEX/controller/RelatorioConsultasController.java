@@ -1,6 +1,5 @@
-package bcc.anelex.Anelex.controller;
+package bcc.anelex.Pet.Shop.ANELEX.controller;
 
-import bcc.anelex.Anelex.model.entities.RelatorioConsultas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +19,12 @@ public class RelatorioConsultasController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<RelatorioConsultas> pegaRelatorio(@PathVariable Long id){
+    public ResponseEntity<RelatorioVendas> pegaRelatorio(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(this.relatorioConsultasService.read(id));
     }
 
     @PostMapping
-    public ResponseEntity<RelatorioConsultas> salvaRelatorios(@RequestBody RelatorioConsultas relatorioConsultas){
+    public ResponseEntity<RelatorioVendas> salvaRelatorios(@RequestBody RelatorioConsultas relatorioConsultas){
         this.relatorioConsultasService.create(relatorioConsultas);
         return ResponseEntity.status(HttpStatus.CREATED).body(relatorioConsultas);
     }
