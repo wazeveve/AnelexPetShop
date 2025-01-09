@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+@Entity
 public class RelatorioConsultas {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

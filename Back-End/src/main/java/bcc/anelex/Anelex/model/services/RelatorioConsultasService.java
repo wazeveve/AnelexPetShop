@@ -17,7 +17,7 @@ public class RelatorioConsultasService {
     }
 
     public RelatorioConsultas create(RelatorioConsultas relatorioConsultas){
-        this.relatorioConsultas.save(relatorioConsultas);
+        this.relatorioConsultasRepository.save(relatorioConsultas);
         return relatorioConsultas;
     }
 
