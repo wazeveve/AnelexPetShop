@@ -1,11 +1,11 @@
-package bcc.anelex.Pet.Shop.ANELEX.model.entities;
+package bcc.anelex.Anelex.model.entities;
 
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-public class RelatorioVendas {
+public class RelatorioConsultas {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
