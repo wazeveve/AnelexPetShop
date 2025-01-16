@@ -3,6 +3,7 @@ package bcc.anelex.Anelex.model.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -11,7 +12,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "data", nullable = false)
-    private Date data;
+    private LocalDateTime data;
     @Column(name = "clienteNome", nullable = false, length = 100)
     private String clienteNome;
     @Column(name = "petNome", nullable = false, length = 50)
@@ -27,11 +28,11 @@ public class Consulta {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 

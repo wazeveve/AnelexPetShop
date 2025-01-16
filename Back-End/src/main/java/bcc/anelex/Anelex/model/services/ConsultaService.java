@@ -1,8 +1,5 @@
 package bcc.anelex.Anelex.model.services;
 
-
-
-
 import bcc.anelex.Anelex.model.entities.Consulta;
 import bcc.anelex.Anelex.model.exceptions.ConsultaNotFoundException;
 import org.springframework.stereotype.Service;

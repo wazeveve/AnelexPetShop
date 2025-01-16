@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> pegarClientes() {
-        emailService.enviarEmailTexto("jean.francisco@alunos.ifsuldeminas.edu.br", "Envio de email", "Deu certo!!!");
+        emailService.agendaEmailTexto("jean.francisco@alunos.ifsuldeminas.edu.br", "Envio de email", "Deu certo 2!!!", LocalDateTime.now().plusMinutes(1));
         return ResponseEntity.status(HttpStatus.OK).body(this.clienteService.read());
     }
 
