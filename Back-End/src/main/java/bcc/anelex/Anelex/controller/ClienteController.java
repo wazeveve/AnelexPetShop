@@ -2,6 +2,7 @@ package bcc.anelex.Anelex.controller;
 
 import bcc.anelex.Anelex.model.entities.Cliente;
 import bcc.anelex.Anelex.model.services.ClienteService;
+import bcc.anelex.Anelex.model.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,12 @@ import java.util.Optional;
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping
     public ResponseEntity<List<Cliente>> pegarClientes() {
+        emailService.enviarEmailTexto("jean.francisco@alunos.ifsuldeminas.edu.br", "Envio de email", "Deu certo!!!");
         return ResponseEntity.status(HttpStatus.OK).body(this.clienteService.read());
     }
 
