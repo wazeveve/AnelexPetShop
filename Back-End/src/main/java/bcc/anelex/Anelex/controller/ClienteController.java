@@ -22,7 +22,6 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> pegarClientes() {
-        emailService.agendaEmailTexto("jean.francisco@alunos.ifsuldeminas.edu.br", "Envio de email", "Deu certo 2!!!", LocalDateTime.now().plusMinutes(1));
         return ResponseEntity.status(HttpStatus.OK).body(this.clienteService.read());
     }
 

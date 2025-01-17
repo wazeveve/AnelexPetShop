@@ -3,6 +3,7 @@ package bcc.anelex.Anelex.model.services;
 import bcc.anelex.Anelex.model.entities.Pet;
 import bcc.anelex.Anelex.model.exceptions.PetNotFoundException;
 import bcc.anelex.Anelex.model.repositories.PetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -12,6 +13,8 @@ import java.util.Optional;
 @Service
 public class PetService {
     private PetRepository petRepository;
+    @Autowired
+    private ClienteService clienteService;
 
     public PetService(PetRepository petRepository){
         this.petRepository = petRepository;
@@ -42,7 +45,7 @@ public class PetService {
         petOriginal.setPath(pet.getPath());
         petOriginal.setGender(pet.getGender());
         petOriginal.setTipo(pet.getTipo());
-        petOriginal.setClient(pet.getClient());
+        petOriginal.setClient(clienteService.read(pet.getClientId()));
         petOriginal.setConsulta(pet.getConsulta());
         this.petRepository.save(petOriginal);
         return petOriginal;

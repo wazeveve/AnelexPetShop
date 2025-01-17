@@ -84,7 +84,7 @@ public class Pet {
         this.path = path;
     }
 
-    public Cliente getClient() { return client; }
+    public Long getClientId() { return client.getId(); }
 
     public void setClient(Cliente client) { this.client = client; }
 

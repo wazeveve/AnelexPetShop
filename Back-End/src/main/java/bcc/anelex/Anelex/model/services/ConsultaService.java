@@ -5,7 +5,6 @@ import bcc.anelex.Anelex.model.exceptions.ConsultaNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import bcc.anelex.Anelex.model.repositories.ConsultaRepository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +37,7 @@ public class ConsultaService {
         consultaOriginal.setData(consulta.getData());
         consultaOriginal.setPet(consulta.getPet());
         consultaOriginal.setValorConsulta(consulta.getValorConsulta());
+        consultaOriginal.setPet(consulta.getPet());
         this.consultaRepository.save(consultaOriginal);
         return consultaOriginal;
     }

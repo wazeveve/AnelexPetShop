@@ -1,6 +1,5 @@
 package bcc.anelex.Anelex.model.entities;
 
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
