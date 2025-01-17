@@ -2,6 +2,8 @@ package bcc.anelex.Anelex.model.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Cliente {
     @Id
@@ -17,6 +19,8 @@ public class Cliente {
     private String email;
     @Column(name = "password", nullable = false, length = 50)
     private String password;
+    @OneToMany(mappedBy = "client")
+    private Set<Pet> pets;
 
     public Long getId() {
         return id;
@@ -65,4 +69,8 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Set<Pet> getPets() { return pets; }
+
+    public void setPets(Set<Pet> pets) { this.pets = pets; }
 }

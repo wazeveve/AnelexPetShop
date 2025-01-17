@@ -23,8 +23,8 @@ public class PetService {
     }
 
     public Pet read(Long id){
-        Optional opt = this.petRepository.findById(id);
-        if(!opt.isPresent()){
+        Optional<Pet> opt = this.petRepository.findById(id);
+        if(opt.isEmpty()){
             throw new PetNotFoundException(id);
         }
         return (Pet)opt.get();
@@ -42,6 +42,8 @@ public class PetService {
         petOriginal.setPath(pet.getPath());
         petOriginal.setGender(pet.getGender());
         petOriginal.setTipo(pet.getTipo());
+        petOriginal.setClient(pet.getClient());
+        petOriginal.setConsulta(pet.getConsulta());
         this.petRepository.save(petOriginal);
         return petOriginal;
     }

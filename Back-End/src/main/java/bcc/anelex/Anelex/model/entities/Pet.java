@@ -7,6 +7,7 @@ import java.util.Date;
 @Entity
 public class Pet {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(length = 50, nullable = false)
@@ -21,6 +22,11 @@ public class Pet {
     private String tipo;
     @Column(length = 150, nullable = false)
     private String path;
+    @OneToOne(mappedBy = "pet")
+    private Consulta consulta;
+    @ManyToOne
+    @JoinColumn(name = "clientId", nullable = false)
+    private Cliente client;
 
     public Long getId() {
         return id;
@@ -77,4 +83,12 @@ public class Pet {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public Cliente getClient() { return client; }
+
+    public void setClient(Cliente client) { this.client = client; }
+
+    public Consulta getConsulta() { return consulta; }
+
+    public void setConsulta(Consulta consulta) { this.consulta = consulta; }
 }

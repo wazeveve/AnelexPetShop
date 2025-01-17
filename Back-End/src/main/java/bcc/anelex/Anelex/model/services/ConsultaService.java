@@ -22,8 +22,8 @@ public class ConsultaService {
     }
 
     public Consulta read(Long id){
-        Optional opt = this.consultaRepository.findById(id);
-        if(!opt.isPresent()){
+        Optional<Consulta> opt = this.consultaRepository.findById(id);
+        if(opt.isEmpty()){
             throw new ConsultaNotFoundException(id);
         }
         return (Consulta)opt.get();
@@ -36,8 +36,7 @@ public class ConsultaService {
     public Consulta update(Long id, Consulta consulta) throws ConsultaNotFoundException{
         Consulta consultaOriginal = read(id);
         consultaOriginal.setData(consulta.getData());
-        consultaOriginal.setClienteNome(consulta.getClienteNome());
-        consultaOriginal.setPetNome(consulta.getPetNome());
+        consultaOriginal.setPet(consulta.getPet());
         consultaOriginal.setValorConsulta(consulta.getValorConsulta());
         this.consultaRepository.save(consultaOriginal);
         return consultaOriginal;
@@ -49,5 +48,4 @@ public class ConsultaService {
         }
         this.consultaRepository.deleteById(id);
     }
-
 }
