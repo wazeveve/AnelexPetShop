@@ -22,11 +22,11 @@ public class Pet {
     private String tipo;
     @Column(length = 150, nullable = false)
     private String path;
-    @OneToOne(mappedBy = "pet")
-    private Consulta consulta;
     @ManyToOne
     @JoinColumn(name = "clientId", nullable = false)
     private Cliente client;
+    @OneToOne(mappedBy = "pet")
+    private Consulta consulta;
 
     public Long getId() {
         return id;
@@ -88,7 +88,7 @@ public class Pet {
 
     public void setClient(Cliente client) { this.client = client; }
 
-    public Consulta getConsulta() { return consulta; }
+    public Long getConsultaId() { return consulta == null ? null : consulta.getId(); }
 
     public void setConsulta(Consulta consulta) { this.consulta = consulta; }
 }

@@ -16,6 +16,9 @@ public class PetService {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private ConsultaService consultaService;
+
     public PetService(PetRepository petRepository){
         this.petRepository = petRepository;
     }
@@ -46,7 +49,7 @@ public class PetService {
         petOriginal.setGender(pet.getGender());
         petOriginal.setTipo(pet.getTipo());
         petOriginal.setClient(clienteService.read(pet.getClientId()));
-        petOriginal.setConsulta(pet.getConsulta());
+        //petOriginal.setConsulta(consultaService.read(pet.getConsultaId()));
         this.petRepository.save(petOriginal);
         return petOriginal;
     }

@@ -2,6 +2,7 @@ package bcc.anelex.Anelex.model.services;
 
 import bcc.anelex.Anelex.model.entities.Consulta;
 import bcc.anelex.Anelex.model.exceptions.ConsultaNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import bcc.anelex.Anelex.model.repositories.ConsultaRepository;
@@ -11,13 +12,16 @@ import java.util.Optional;
 @Service
 public class ConsultaService {
     ConsultaRepository consultaRepository;
+
+    @Autowired
+    private PetService petService;
+
     public ConsultaService(ConsultaRepository consultaRepository){
         this.consultaRepository = consultaRepository;
     }
 
     public Consulta create(Consulta consulta){
-        this.consultaRepository.save(consulta);
-        return consulta;
+        return this.consultaRepository.save(consulta);
     }
 
     public Consulta read(Long id){
@@ -35,9 +39,8 @@ public class ConsultaService {
     public Consulta update(Long id, Consulta consulta) throws ConsultaNotFoundException{
         Consulta consultaOriginal = read(id);
         consultaOriginal.setData(consulta.getData());
-        consultaOriginal.setPet(consulta.getPet());
+        consultaOriginal.setPet(petService.read(consulta.getPetId()));
         consultaOriginal.setValorConsulta(consulta.getValorConsulta());
-        consultaOriginal.setPet(consulta.getPet());
         this.consultaRepository.save(consultaOriginal);
         return consultaOriginal;
     }

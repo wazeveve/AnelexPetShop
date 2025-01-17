@@ -31,7 +31,7 @@ public class Consulta {
         this.data = data;
     }
 
-    public Pet getPet() { return pet; }
+    public Long getPetId() { return pet.getId(); }
 
     public void setPet(Pet pet) { this.pet = pet; }
 
