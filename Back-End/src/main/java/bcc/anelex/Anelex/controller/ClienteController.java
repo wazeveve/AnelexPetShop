@@ -61,7 +61,7 @@ public class ClienteController {
     public ResponseEntity<LoginResponse> loginClient(@RequestBody LoginRequest loginRequest){
         Cliente cliente = this.clienteRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
 
-        if(passwordEncoder.matches(cliente.getPassword(), loginRequest.password())){
+        if(/*passwordEncoder.matches(cliente.getPassword(), loginRequest.password())*/cliente.getPassword().equals(loginRequest.password())){
             String token = this.tokenService.generateTokenClient(cliente);
             return ResponseEntity.ok(new LoginResponse(cliente.getUsername(), token));
         }

@@ -24,7 +24,7 @@ public class ClienteService {
     }
 
     public Cliente create(Cliente cliente){
-        cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+        //cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
         this.clienteRepository.save(cliente);
         return cliente;
     }
