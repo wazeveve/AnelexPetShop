@@ -4,6 +4,8 @@ package bcc.anelex.Anelex.model.services;
 import bcc.anelex.Anelex.model.entities.Cliente;
 import bcc.anelex.Anelex.model.exceptions.ClienteNotFoundException;
 import bcc.anelex.Anelex.model.repositories.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -14,18 +16,22 @@ import java.util.Optional;
 public class ClienteService {
     ClienteRepository clienteRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public ClienteService(ClienteRepository clienteRepository){
         this.clienteRepository = clienteRepository;
     }
 
     public Cliente create(Cliente cliente){
+        cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
         this.clienteRepository.save(cliente);
         return cliente;
     }
 
     public Cliente read(Long id){
-        Optional opt = this.clienteRepository.findById(id);
-        if(!opt.isPresent()){
+        Optional<Cliente> opt = this.clienteRepository.findById(id);
+        if(opt.isEmpty()){
             throw new ClienteNotFoundException(id);
         }
         return (Cliente)opt.get();

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -37,7 +39,14 @@ public class ConsultaController {
         int dia = consulta.getData().getDayOfMonth(), mes = consulta.getData().getMonthValue(), ano = consulta.getData().getYear();
         int hora = consulta.getData().getHour(), minutos = consulta.getData().getMinute();
         emailService.agendaEmailTexto(cliente.getEmail(), "Consulta Marcada",
-                String.format("Olá %s!\nSua consulta está marcada para %d/%d/%d as %d:%d!\n", cliente.getName(), dia, mes, ano, hora, minutos), consulta.getData());
+                String.format("Olá %s!\nSua consulta está marcada para %d/%d/%d as %d:%d!\n", cliente.getName(), dia, mes, ano, hora, minutos), LocalDateTime.now());
+        if(consulta.getNotificacaoHora() != 0){
+            emailService.agendaEmailTexto(cliente.getEmail(), "Consulta Marcada",
+                    String.format("Olá %s!\nSua consulta está marcada para %d/%d/%d as %d:%d!\n", cliente.getName(), dia, mes, ano, hora, minutos), consulta.getData().minusDays(1));
+        } else {
+            emailService.agendaEmailTexto(cliente.getEmail(), "Consulta Marcada",
+                    String.format("Olá %s!\nSua consulta está marcada para %d/%d/%d as %d:%d!\n", cliente.getName(), dia, mes, ano, hora, minutos), consulta.getData().minusHours(consulta.getNotificacaoHora()));
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(consulta);
     }
 }

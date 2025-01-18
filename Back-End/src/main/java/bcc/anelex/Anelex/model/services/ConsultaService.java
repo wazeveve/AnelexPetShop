@@ -41,6 +41,7 @@ public class ConsultaService {
         consultaOriginal.setData(consulta.getData());
         consultaOriginal.setPet(petService.read(consulta.getPetId()));
         consultaOriginal.setValorConsulta(consulta.getValorConsulta());
+        consultaOriginal.setNotificacaoHora(consulta.getNotificacaoHora());
         this.consultaRepository.save(consultaOriginal);
         return consultaOriginal;
     }

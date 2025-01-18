@@ -16,6 +16,8 @@ public class Consulta {
     private Pet pet;
     @Column(name = "valorConsulta", nullable = false)
     private float valorConsulta;
+    @Column(name = "notificacaoHora")
+    private Long notificacaoHora;
 
     public Long getId() { return id; }
 
@@ -42,4 +44,8 @@ public class Consulta {
     public void setValorConsulta(float valorConsulta) {
         this.valorConsulta = valorConsulta;
     }
+
+    public Long getNotificacaoHora() { return notificacaoHora; }
+
+    public void setNotificacaoHora(Long notificacaoHora) { this.notificacaoHora = notificacaoHora; }
 }
