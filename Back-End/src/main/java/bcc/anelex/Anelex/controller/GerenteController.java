@@ -1,7 +1,12 @@
 package bcc.anelex.Anelex.controller;
 
+import bcc.anelex.Anelex.dto.LoginRequest;
+import bcc.anelex.Anelex.dto.LoginResponse;
+import bcc.anelex.Anelex.model.entities.Cliente;
 import bcc.anelex.Anelex.model.entities.Gerente;
+import bcc.anelex.Anelex.model.repositories.GerenteRepository;
 import bcc.anelex.Anelex.model.services.GerenteService;
+import bcc.anelex.Anelex.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +18,12 @@ import java.util.List;
 public class GerenteController {
     @Autowired
     private GerenteService gerenteService;
+
+    @Autowired
+    private GerenteRepository gerenteRepository;
+
+    @Autowired
+    private TokenService tokenService;
 
     @GetMapping
     public ResponseEntity<List<Gerente>> pegarGerentes() {
@@ -44,5 +55,15 @@ public class GerenteController {
         this.gerenteService.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
 
+    }
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginClient(@RequestBody LoginRequest loginRequest){
+        Cliente cliente = this.gerenteRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+
+        if(/*passwordEncoder.matches(cliente.getPassword(), loginRequest.password())*/cliente.getPassword().equals(loginRequest.password())){
+            String token = this.tokenService.generateTokenClient(cliente);
+            return ResponseEntity.ok(new LoginResponse(cliente.getUsername(), token));
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
