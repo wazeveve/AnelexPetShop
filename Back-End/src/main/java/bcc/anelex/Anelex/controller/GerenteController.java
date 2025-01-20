@@ -58,11 +58,11 @@ public class GerenteController {
     }
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginClient(@RequestBody LoginRequest loginRequest){
-        Cliente cliente = this.gerenteRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        Gerente gerente = this.gerenteRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new RuntimeException("Gerente não encontrado!"));
 
-        if(/*passwordEncoder.matches(cliente.getPassword(), loginRequest.password())*/cliente.getPassword().equals(loginRequest.password())){
-            String token = this.tokenService.generateTokenClient(cliente);
-            return ResponseEntity.ok(new LoginResponse(cliente.getUsername(), token));
+        if(/*passwordEncoder.matches(gerente.getPassword(), loginRequest.password())*/gerente.getPassword().equals(loginRequest.password())){
+            String token = this.tokenService.generateTokenClient(gerente);
+            return ResponseEntity.ok(new LoginResponse(gerente.getUsername(), token));
         }
         return ResponseEntity.badRequest().build();
     }

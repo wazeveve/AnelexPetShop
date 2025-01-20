@@ -45,5 +45,20 @@ public class TokenService {
 
     private Instant geraneteExperitonDate(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-3"));
+
+    }
+    public String generateTokenClient(Gerente gerente) { // Método para geração de um token
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            String token = JWT.create()
+                    .withIssuer("anelex")
+                    .withSubject(gerente.getEmail())
+                    .withExpiresAt(this.geraneteExperitonDate())
+                    .sign(algorithm);
+            return token;
+        } catch (JWTCreationException ex) {
+            throw new RuntimeException("Erro ao criar um token!!");
+        }
     }
 }
+
