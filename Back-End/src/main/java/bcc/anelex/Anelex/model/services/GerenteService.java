@@ -1,8 +1,10 @@
 package bcc.anelex.Anelex.model.services;
 
 import bcc.anelex.Anelex.model.entities.Gerente;
+import bcc.anelex.Anelex.model.entities.security.Role;
 import bcc.anelex.Anelex.model.exceptions.GerenteNotFoundException;
 import bcc.anelex.Anelex.model.repositories.GerenteRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,6 +20,9 @@ public class GerenteService {
     }
 
     public Gerente create(Gerente gerente){
+        String encryptedPassword = new BCryptPasswordEncoder().encode(gerente.getPassword());
+        gerente.setPassword(encryptedPassword);
+        gerente.setRole(Role.MANAGER);
         this.gerenteRepository.save(gerente);
         return gerente;
     }
@@ -36,10 +41,11 @@ public class GerenteService {
 
     public Gerente update(Long id, Gerente gerente) throws GerenteNotFoundException{
         Gerente gerenteOriginal = read(id);
+        String encryptedPassword = new BCryptPasswordEncoder().encode(gerente.getPassword());
         gerenteOriginal.setCpf(gerente.getCpf());
         gerenteOriginal.setEmail(gerente.getEmail());
         gerenteOriginal.setName(gerente.getName());
-        gerenteOriginal.setPassword(gerente.getPassword());
+        gerenteOriginal.setPassword(encryptedPassword);
         gerenteOriginal.setTelephone(gerente.getTelephone());
         this.gerenteRepository.save(gerenteOriginal);
         return gerenteOriginal;

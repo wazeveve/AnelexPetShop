@@ -2,9 +2,11 @@ package bcc.anelex.Anelex.model.services;
 
 
 import bcc.anelex.Anelex.model.entities.Cliente;
+import bcc.anelex.Anelex.model.entities.security.Role;
 import bcc.anelex.Anelex.model.exceptions.ClienteNotFoundException;
 import bcc.anelex.Anelex.model.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,9 @@ public class ClienteService {
     }
 
     public Cliente create(Cliente cliente){
-        //cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+        String encryptedPassword = new BCryptPasswordEncoder().encode(cliente.getPassword());
+        cliente.setPassword(encryptedPassword);
+        cliente.setRole(Role.CLIENT);
         this.clienteRepository.save(cliente);
         return cliente;
     }
@@ -43,10 +47,11 @@ public class ClienteService {
 
     public Cliente update(Long id, Cliente cliente) throws ClienteNotFoundException{
         Cliente clienteOriginal = read(id);
+        String encryptedPassword = new BCryptPasswordEncoder().encode(cliente.getPassword());
         clienteOriginal.setUsername(cliente.getUsername());
         clienteOriginal.setEmail(cliente.getEmail());
         clienteOriginal.setName(cliente.getName());
-        clienteOriginal.setPassword(cliente.getPassword());
+        clienteOriginal.setPassword(encryptedPassword);
         clienteOriginal.setTelephone(cliente.getTelephone());
         this.clienteRepository.save(clienteOriginal);
         return clienteOriginal;

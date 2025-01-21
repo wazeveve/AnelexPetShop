@@ -1,6 +1,7 @@
 package bcc.anelex.Anelex.security;
 
 import bcc.anelex.Anelex.model.entities.Cliente;
+import bcc.anelex.Anelex.model.entities.Gerente;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
@@ -22,7 +23,21 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("anelex")
                     .withSubject(cliente.getEmail())
-                    .withExpiresAt(this.geraneteExperitonDate())
+                    .withExpiresAt(this.generateExperitonDate())
+                    .sign(algorithm);
+            return token;
+        } catch (JWTCreationException ex){
+            throw new RuntimeException("Erro ao criar um token!!");
+        }
+    }
+
+    public String generateTokenManager(Gerente gerente){ // Método para geração de um token
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            String token = JWT.create()
+                    .withIssuer("anelex")
+                    .withSubject(gerente.getCpf())
+                    .withExpiresAt(this.generateExperitonDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException ex){
@@ -43,22 +58,7 @@ public class TokenService {
         }
     }
 
-    private Instant geraneteExperitonDate(){
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-3"));
-
-    }
-    public String generateTokenClient(Gerente gerente) { // Método para geração de um token
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
-                    .withIssuer("anelex")
-                    .withSubject(gerente.getEmail())
-                    .withExpiresAt(this.geraneteExperitonDate())
-                    .sign(algorithm);
-            return token;
-        } catch (JWTCreationException ex) {
-            throw new RuntimeException("Erro ao criar um token!!");
-        }
+    private Instant generateExperitonDate(){
+        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }
-

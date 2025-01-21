@@ -10,6 +10,9 @@ import bcc.anelex.Anelex.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -24,7 +27,7 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
     @Autowired
     private TokenService tokenService;
 
@@ -59,12 +62,10 @@ public class ClienteController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginClient(@RequestBody LoginRequest loginRequest){
-        Cliente cliente = this.clienteRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password());
+        var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        if(/*passwordEncoder.matches(cliente.getPassword(), loginRequest.password())*/cliente.getPassword().equals(loginRequest.password())){
-            String token = this.tokenService.generateTokenClient(cliente);
-            return ResponseEntity.ok(new LoginResponse(cliente.getUsername(), token));
-        }
-        return ResponseEntity.badRequest().build();
+        var token = this.tokenService.generateTokenClient((Cliente) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponse(((Cliente) auth.getPrincipal()).getUsername(), token));
     }
 }

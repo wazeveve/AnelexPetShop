@@ -1,9 +1,16 @@
 package bcc.anelex.Anelex.model.entities;
 
+import bcc.anelex.Anelex.model.entities.security.Role;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class Gerente {
+public class Gerente implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,6 +24,8 @@ public class Gerente {
     private String email;
     @Column(name = "password", nullable = false, length = 50)
     private String password;
+    @Column(name = "role")
+    private Role role;
 
     public Long getId() {
         return id;
@@ -58,11 +67,43 @@ public class Gerente {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Role getRole() { return role; }
+
+    public void setRole(Role role) { this.role = role; }
+
+    @Override
+    public String getUsername() { return this.cpf; }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_MANAGER"), new SimpleGrantedAuthority("ROLE_CLIENT"));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
