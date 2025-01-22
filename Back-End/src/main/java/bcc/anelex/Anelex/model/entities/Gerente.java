@@ -22,7 +22,7 @@ public class Gerente implements UserDetails {
     private String telephone;
     @Column(name = "email", length = 100)
     private String email;
-    @Column(name = "password", nullable = false, length = 50)
+    @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "role")
     private Role role;
