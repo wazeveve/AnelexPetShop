@@ -28,7 +28,7 @@ public class Cliente implements UserDetails {
     @OneToMany(mappedBy = "client")
     private Set<Pet> pets;
     @Column(name = "role")
-    private Role role;
+    private Role role; // Um cliente com a Role.ADMIN consegue entrar em qualquer rota, já o Role.User se delimita a algumas rotas
 
     public Long getId() {
         return id;
