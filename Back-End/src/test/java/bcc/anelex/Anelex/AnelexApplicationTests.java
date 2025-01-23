@@ -12,24 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class AnelexApplicationTests {
-	@Mock
-	ClienteRepository clienteRepository;
-
-	@InjectMocks
-	ClienteController clienteController;
 
 	@Test
-	void testeSoma(){
+	void testGetAndSet() {
 		Cliente cliente = new Cliente();
-		cliente.setName("Cliente");
-		cliente.setUsername("Cliente");
-		cliente.setPassword("cliente123");
-		cliente.setRole(Role.USER);
-		cliente.setEmail("cliente@gmail");
+		cliente.setUsername("Username de teste!");
+		cliente.setPassword("Senha de teste!");
+		cliente.setName("Nome de teste");
 
-		var clientes = clienteController.pegarClientes();
-
-		int cont = 0;
-		assertEquals(cont, 0);
+		assertEquals(cliente.getUsername(), "Username de teste!");
+		assertEquals(cliente.getPassword(), "Senha de teste!");
+		assertEquals(cliente.getName(), "Nome de teste");
 	}
 }
