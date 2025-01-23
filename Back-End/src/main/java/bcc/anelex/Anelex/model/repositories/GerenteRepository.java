@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GerenteRepository extends JpaRepository<Gerente, Long> {
-    UserDetails findByCpf(String cpf);
+    UserDetails findByEmail(String email);
 }

@@ -1,6 +1,7 @@
 package bcc.anelex.Anelex.model.services;
 
 import bcc.anelex.Anelex.model.entities.Gerente;
+import bcc.anelex.Anelex.model.entities.role.Role;
 import bcc.anelex.Anelex.model.exceptions.GerenteNotFoundException;
 import bcc.anelex.Anelex.model.repositories.GerenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class GerenteService {
     private GerenteRepository gerenteRepository;
 
     public Gerente create(Gerente gerente){
+        gerente.setRole(Role.ADMIN);
         this.gerenteRepository.save(gerente);
         return gerente;
     }
@@ -40,6 +42,7 @@ public class GerenteService {
         gerenteOriginal.setName(gerente.getName());
         gerenteOriginal.setPassword(new BCryptPasswordEncoder().encode(gerente.getPassword()));
         gerenteOriginal.setTelephone(gerente.getTelephone());
+        gerenteOriginal.setRole(Role.ADMIN);
         this.gerenteRepository.save(gerenteOriginal);
         return gerenteOriginal;
     }
