@@ -1,4 +1,4 @@
-package bcc.anelex.Anelex.security;
+package bcc.anelex.Anelex.model.services.security;
 
 import bcc.anelex.Anelex.model.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustumClientDetailsService implements UserDetailsService {
+public class AuthorizationService implements UserDetailsService {
     @Autowired
-    private ClienteRepository clienteRepository;
+    ClienteRepository clienteRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

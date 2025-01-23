@@ -1,6 +1,6 @@
 package bcc.anelex.Anelex.model.entities;
 
-import bcc.anelex.Anelex.model.entities.security.Role;
+import bcc.anelex.Anelex.model.entities.role.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -64,7 +64,7 @@ public class Cliente implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_CLIENT"));
+        return this.role == Role.ADMIN ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER")) : List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     public void setUsername(String username) {

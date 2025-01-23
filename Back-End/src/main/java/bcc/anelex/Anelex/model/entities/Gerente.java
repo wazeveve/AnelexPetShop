@@ -1,6 +1,6 @@
 package bcc.anelex.Anelex.model.entities;
 
-import bcc.anelex.Anelex.model.entities.security.Role;
+import bcc.anelex.Anelex.model.entities.role.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Gerente implements UserDetails {
+public class Gerente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -73,37 +73,5 @@ public class Gerente implements UserDetails {
 
     public String getPassword() {
         return password;
-    }
-
-    public Role getRole() { return role; }
-
-    public void setRole(Role role) { this.role = role; }
-
-    @Override
-    public String getUsername() { return this.cpf; }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_MANAGER"), new SimpleGrantedAuthority("ROLE_CLIENT"));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

@@ -1,10 +1,11 @@
 package bcc.anelex.Anelex.security;
 
 import bcc.anelex.Anelex.model.entities.Cliente;
-import bcc.anelex.Anelex.model.entities.Gerente;
+import bcc.anelex.Anelex.model.entities.dtos.AuthenticationDTO;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.*;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,37 +16,22 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
     @Value("${api.security.token.secret}")
-    private String secret; //Chave privada
-
-    public String generateTokenClient(Cliente cliente){ // Método para geração de um token
+    private String secret;
+    public String generateToken(Cliente cliente){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("anelex")
                     .withSubject(cliente.getEmail())
-                    .withExpiresAt(this.generateExperitonDate())
+                    .withExpiresAt(this.getExpirationDate())
                     .sign(algorithm);
             return token;
-        } catch (JWTCreationException ex){
-            throw new RuntimeException("Erro ao criar um token!!");
+        } catch (JWTCreationException exception){
+            throw new RuntimeException("Erro ao gerar o token!", exception);
         }
     }
 
-    public String generateTokenManager(Gerente gerente){ // Método para geração de um token
-        try{
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
-                    .withIssuer("anelex")
-                    .withSubject(gerente.getCpf())
-                    .withExpiresAt(this.generateExperitonDate())
-                    .sign(algorithm);
-            return token;
-        } catch (JWTCreationException ex){
-            throw new RuntimeException("Erro ao criar um token!!");
-        }
-    }
-
-    public String validateToken(String token){ // Verificando um token
+    public String validateToke(String token){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
@@ -54,11 +40,11 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception){
-            return null;
+            throw new RuntimeException("Erro ao verificar o token!", exception);
         }
     }
 
-    private Instant generateExperitonDate(){
+    public Instant getExpirationDate(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }

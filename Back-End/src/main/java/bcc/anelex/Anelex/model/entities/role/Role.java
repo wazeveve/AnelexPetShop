@@ -1,8 +1,8 @@
-package bcc.anelex.Anelex.model.entities.security;
+package bcc.anelex.Anelex.model.entities.role;
 
 public enum Role {
-    MANAGER("manager"),
-    CLIENT("client");
+    ADMIN("admin"),
+    USER("user");
 
     private String role;
 
